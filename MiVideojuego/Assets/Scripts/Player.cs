@@ -1,15 +1,16 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     // Movimiento
-    public float speed = 5;
+    public float speed = 4;
     private Rigidbody2D rb2D;
     private float move;
 
     // Salto
-    public float jumpForce = 4f;
+    public float jumpForce = 3f;
     private bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
@@ -76,6 +77,11 @@ public class Player : MonoBehaviour
         {
             // Destruir la moneda cuando el jugador la recolecta
             Destroy(collision.gameObject);
+        }
+
+        if (collision.transform.CompareTag("Spikes"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia la escena actual
         }
     }
 }
